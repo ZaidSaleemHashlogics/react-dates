@@ -620,7 +620,7 @@ class DayPicker extends React.PureComponent {
   }
 
   onNextMonthClick(e) {
-    if (e) e.preventDefault();
+    if (e) e.preventDefault();    
     this.onNextMonthTransition();
   }
 
@@ -628,6 +628,8 @@ class DayPicker extends React.PureComponent {
     const { isRTL, numberOfMonths, daySize } = this.props;
     const { calendarMonthWidth, monthTitleHeight } = this.state;
 
+    console.log('onNextMonthTransition 1');
+    
     let translationValue;
 
     if (this.isVertical()) {
@@ -642,10 +644,16 @@ class DayPicker extends React.PureComponent {
         translationValue = 0;
       }
 
+      console.log('onNextMonthTransition 2');
+
+
       const visibleCalendarWeeks = this.calendarMonthWeeks.slice(2, numberOfMonths + 2);
       const calendarMonthWeeksHeight = Math.max(0, ...visibleCalendarWeeks) * (daySize - 1);
       const newMonthHeight = monthTitleHeight + calendarMonthWeeksHeight + 1;
       this.adjustDayPickerHeight(newMonthHeight);
+
+      console.log('onNextMonthTransition 3');
+
     }
 
     this.setState({
@@ -951,7 +959,7 @@ class DayPicker extends React.PureComponent {
     const onNextMonthClick = orientation === VERTICAL_SCROLLABLE
       ? this.getNextScrollableMonths
       : this.onNextMonthClick;
-
+      
     return (
       <DayPickerNavigation
         disablePrev={disablePrev}
